@@ -2,21 +2,22 @@ import React from "react";
 
 
 class UserCard extends React.Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
     }
 
     render(){
+        console.log("UserCard:",this.props)
         return(
+
             <div>
-
-                <h2>Name{}</h2>
-                <p>Handle</p>
-                <p>Followers</p>
-                <p>Following</p>
-
-
+                <img src={this.props.user.avatar_url} alt={this.props.user.name}/>
+                <h2>{this.props.user.name}</h2>
+                <p>{this.props.user.login}</p>
+                <p>{this.props.user.location}</p>
+                <span>Followers: {this.props.user.followers}</span><br/>
+                <span>Following: {this.props.user.following}</span>
             </div>
         )
     }

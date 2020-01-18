@@ -1,23 +1,18 @@
-import React from "react";
 
+//was not able to make it work out of app component
 
-
-export default userApi = (user) =>{
-
-    return fetch(`https://api.github.com/${user}/`)
+export const userApi = (user) =>{
+    fetch(`https://api.github.com/users/${user}`)
         .then(res => {
             console.log(res);
 
             return res.json().then(data => {
+                console.log(data)
                 return data
             })
         })
         .catch(err => {
             console.log(err)
         })
-
-
-
-
-
+        
 }
