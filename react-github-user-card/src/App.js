@@ -27,11 +27,9 @@ class App extends React.Component {
   componentDidMount(){
     console.log("componentDidMount", this)
 
-    console.log(this.state.users)
-
 
     this.userApiRequest("adrianbparra")
-    this.followerRequest("adrianbparra")
+    // this.followerRequest("adrianbparra")
 
   }
 
@@ -58,20 +56,21 @@ class App extends React.Component {
         })
         
 }
-  followerRequest = (user) => {
-    fetch(`https://api.github.com/users/${user}/followers`)
-      .then(res => {
-        return res.json().then(data => {
-          console.log("follower Data:" ,data)
-          return this.setState({
-            ...this.state,
-            followers : {
-              ...this.state.followers,
-              user: [data]}
-          })
-        })
-      })
-  }
+
+  // followerRequest = (user) => {
+  //   fetch(`https://api.github.com/users/${user}/followers`)
+  //     .then(res => {
+  //       return res.json().then(data => {
+  //         console.log("follower Data:" ,data)
+  //         return this.setState({
+  //           ...this.state,
+  //           followers : {
+  //             ...this.state.followers,
+  //             user: [data]}
+  //         })
+  //       })
+  //     })
+  // }
 
 
   render(){
