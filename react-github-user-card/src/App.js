@@ -63,7 +63,15 @@ const useStyles = theme => ({
       width: 200,
     },
   },
-  card: {
+  searchButton : {
+    backgroundColor: '#5c6bc0',
+    color: "#ffffff",
+    "&:hover": {
+      backgroundColor : "rgba(255, 255, 255, 0.25)"
+
+    },
+  },
+  grid: {
     width: "auto",
     padding: 48,
     backgroundColor: theme.palette.common.white,
@@ -83,7 +91,7 @@ class App extends React.Component {
     this.state ={
       //set state of user fetch in api
       userName: 
-        "adrianbparra"
+        ""
       ,
       users : [
 
@@ -100,14 +108,43 @@ class App extends React.Component {
     console.log("componentDidMount", this)
 
 
-    this.userApiRequest(this.state.userName)
+    this.userApiRequest("adrianbparra")
     // this.followerRequest("adrianbparra")
 
     
   }
 
-  
 
+  handleUserChange = (e) => {
+
+    console.log(e.target.value)
+
+    this.setState({
+      ...this.state,
+      userName: e.target.value
+    })
+
+    console.log(this.state)
+
+  }
+
+  
+  searchUserName = (e) => {
+    e.preventDefault();
+
+    console.log(e)
+
+    this.userApiRequest(this.state.userName);
+
+
+  }
+
+  handleApiErrors = (res) => {
+    if(!res.ok) {
+      throw Error(res.statusText)
+    }
+    return res
+  }
 
   userApiRequest = (user) =>{
     fetch(`https://api.github.com/users/${user}`)
@@ -126,7 +163,7 @@ class App extends React.Component {
       })
       .catch(err => {
         console.log(err)
-    })
+      })
   }
 
 
@@ -149,17 +186,20 @@ class App extends React.Component {
             </div>
               <InputBase 
                 placeholder="User Name"
+                type="username"
+                name="userName"
                 inputProps = {{"aria-label": "search"}}
+                onChange={this.handleUserChange}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
               />
             </div>
-            <Button variant="contained" color="primary">Search</Button>
+            <Button variant="contained" className={classes.searchButton} onClick={this.searchUserName}>Search</Button>
           </Toolbar>
         </AppBar>
-        <Grid className={classes.card} container spacing={2}>
+        <Grid className={classes.grid} container spacing={2}>
           
           {this.state.users.length < 1 ? <h1>Loading...</h1> : this.state.users.map(user => {
             return <UserCard key = {user.id} user = {user} />

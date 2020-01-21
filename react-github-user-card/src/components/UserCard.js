@@ -8,12 +8,12 @@ import { Box } from "@material-ui/core";
 
 const useStyles = theme => ({
     root: {
-        padding : theme.spacing(2),
-        
+        padding : theme.spacing(4),
+        marginBottom: theme.spacing(2),
     },
     userCard : {
         textAlign: "center",
-    
+        
       },
     
 })
@@ -65,7 +65,7 @@ class UserCard extends React.Component{
                 </div>
                 <Grid container spacing={3} sx={12}
                 >
-                    {this.state.followers.length < 1 ? <div>Loading...</div> : this.state.followers.map(follower =><FollowerCard follower={follower}/>)}
+                    {this.state.followers.length < 1 ? <div>Loading Followers</div> : this.state.followers.map(follower =><FollowerCard follower={follower}/>)}
                 </Grid>
             </Paper>
         )
